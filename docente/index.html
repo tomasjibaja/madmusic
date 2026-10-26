@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sonoro · Panel docente</title>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEEAFF;--paper:#fff;--ink:#1F1B4D;--line:#1F1B4D;--pink:#FF5C8A;--sun:#FFC93C;--mint:#2ED3A5;--sky:#3DA5FF;--vio:#6B4DE6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17143F;--paper:#26225C;--ink:#EDE9FF;--line:#0C0A2A}}
+:root[data-theme="dark"]{--bg:#17143F;--paper:#26225C;--ink:#EDE9FF;--line:#0C0A2A}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-weight:600}
+h1,h2,h3,.dp{font-family:'Lilita One',Nunito,sans-serif;font-weight:400;margin:0}
+button{font:inherit;color:inherit;cursor:pointer}:focus-visible{outline:4px solid var(--sky);outline-offset:2px}
+#app{max-width:960px;margin:0 auto;padding:14px}
+.card{background:var(--paper);border:3px solid var(--line);border-radius:16px;box-shadow:0 4px 0 var(--line);padding:14px;margin-bottom:14px}
+.btn{font-family:'Lilita One',sans-serif;font-size:1rem;background:var(--sun);color:#1F1B4D;border:3px solid var(--line);border-radius:12px;padding:8px 14px;box-shadow:0 3px 0 var(--line)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}.btn.mt{background:var(--mint)}.btn.pk{background:var(--pink)}.btn.gh{background:var(--paper);color:var(--ink)}.btn.sm{font-size:.85rem;padding:5px 10px}
+input,select,textarea{font:inherit;width:100%;padding:10px;border:3px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);margin:4px 0 10px}textarea{font:12px ui-monospace,monospace}
+label{font-weight:800;font-size:.9rem}.lnk{background:none;border:0;padding:4px 0;font-weight:800;text-decoration:underline;color:var(--ink)}
+.err{color:#D6264F;font-weight:800;min-height:1.2em;margin:0 0 8px}small,.mut{opacity:.75;font-weight:700}
+.top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}.top h1{flex:1;font-size:1.6rem;min-width:140px}
+.tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto}.tabs button{font-family:'Lilita One';padding:8px 14px;border:3px solid var(--line);border-radius:12px;background:var(--paper);white-space:nowrap}.tabs button[aria-current=page]{background:var(--vio);color:#fff}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:14px}.kp .card{margin:0;text-align:center}.kp b{display:block;font:400 1.9rem 'Lilita One'}.kp span{font-size:.8rem;font-weight:800;opacity:.8}
+.bar{height:14px;border:3px solid var(--line);border-radius:99px;background:var(--bg);overflow:hidden;flex:1}.bar i{display:block;height:100%}
+.br{display:grid;grid-template-columns:minmax(90px,150px) 1fr 52px;gap:8px;align-items:center;margin:7px 0}.br b{text-align:right}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:3px solid var(--line);border-radius:14px;background:var(--paper);margin-bottom:10px;width:100%;text-align:left}
+.row .n{flex:1;min-width:0}.row .n b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pill{font:400 .85rem 'Lilita One';background:var(--sun);color:#1F1B4D;border:2px solid var(--line);border-radius:99px;padding:2px 10px;white-space:nowrap}.pill.g{background:var(--mint)}.pill.r{background:var(--pink);color:#fff}
+.sw{width:56px;height:30px;border-radius:99px;border:3px solid var(--line);background:#c9c4e8;position:relative;flex:none;padding:0}.sw::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--line);transition:left .15s}.sw[aria-checked=true]{background:var(--mint)}.sw[aria-checked=true]::after{left:28px}
+.md{position:fixed;inset:0;z-index:70;background:rgba(15,12,50,.65);display:grid;place-items:center;padding:16px}.md .card{max-width:480px;width:100%;max-height:90vh;overflow:auto;margin:0}
+.pl{display:flex;gap:8px;flex-wrap:wrap}.chip{display:inline-block;border:2px solid var(--line);border-radius:99px;padding:2px 10px;margin:3px;background:var(--bg);font-weight:800;font-size:.85rem}
+.rd{display:flex;gap:8px;align-items:center;padding:4px 0}.rd .bar{max-width:120px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;font-weight:800;z-index:90;opacity:0;transition:opacity .3s;pointer-events:none}#toast.on{opacity:1}
+.auth{max-width:400px;margin:8vh auto 0}
+</style></head><body><div id="app"></div><div id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const GM={ritmo:['Ritmo','Ritmo'],cambio:['Propiedades del sonido','Sonido'],arena:['Arena Sonora','Sonido'],ances:['Instrumentos ancestrales','Precolombina'],orig:['Línea del tiempo','Origen'],ances:['Instrumentos ancestrales','Precolombina'],orig:['Línea del tiempo','Origen']};
+const AREAS=['Sonido','Ritmo','Origen','Precolombina'];
+const TP=[['t1','¿Qué es la música?',6],['t2','Escribir el ritmo',6],['t3','Propiedades del sonido',6],['t4','Dinámica y velocidad',6],['t5','Origen de la música',4],['t6','El huayno',5]];
+const CH=['Bip','Teddy','Mimi','Spike','Capitán Rulo','Merlo','Sombra','Lila','Zuki','Rex','Brisa','Sir Forte'];
+const thr=n=>Math.round(500*(Math.pow(1.47,n)-1)/0.47/10)*10;
+const lvl=p=>{let l=1;while(l<10&&p>=thr(l))l++;return l};
+const total=u=>Object.values(u.points||{}).reduce((a,b)=>a+b,0);
+const area=(u,a)=>Object.entries(GM).filter(([,g])=>g[1]===a).reduce((s,[id])=>s+((u.points||{})[id]||0),0);
+let TOK=null,USERS=[],SET={allowSignup:true,topics:{}},ready=false,tab='res',sel=null,q='',srt='pts';
+try{TOK=sessionStorage.getItem('sonoro_t')}catch(e){}
+async function api(path,method,body){const h={'Content-Type':'application/json'};if(TOK)h.Authorization='Bearer '+TOK;let r;
+try{r=await fetch('/api/index?r='+encodeURIComponent(path),{method:method||'GET',headers:h,body:body?JSON.stringify(body):undefined})}catch(e){throw{error:'Sin conexión con el servidor.'}}
+let d={};try{d=await r.json()}catch(e){}
+if(r.status===401&&TOK&&path!=='teacher/login'){TOK=null;try{sessionStorage.removeItem('sonoro_t')}catch(e){}if(ready)render()}
+if(!r.ok)throw{error:d.error||('Error '+r.status+': el servidor no respondió como se esperaba.'),status:r.status};return d}
+function toast(t){const e=$('#toast');e.textContent=t;e.className='on';setTimeout(()=>e.className='',2400)}
+function modal(h){const m=document.createElement('div');m.className='md';m.id='mdl';m.onclick=e=>{if(e.target===m)m.remove()};m.innerHTML=`<div class="card" role="dialog">${h}</div>`;document.body.appendChild(m)}
+const close=()=>{const m=$('#mdl');if(m)m.remove()};
+const bar=(v,m,c)=>`<div class="bar"><i style="width:${m?Math.min(100,v/m*100):0}%;background:${c}"></i></div>`;
+const open_=id=>SET.topics&&SET.topics[id]===true;
+async function refresh(){const d=await api('teacher/users');USERS=d.users.map(u=>({...u,k:u.username,T:total(u),L:lvl(total(u))}));SET=d.settings}
+async function reload(){try{await refresh();render()}catch(e){toast(e.error)}}
+async function init(){if(TOK){try{await refresh()}catch(e){TOK=null}}ready=true;render()}
+function render(){const a=$('#app');
+if(!ready){a.innerHTML='<p style="text-align:center;margin-top:30vh">Cargando…</p>';return}
+if(!TOK){a.innerHTML=`<form class="card auth" onsubmit="return login(event)"><h1 class="dp">Panel docente</h1><label for="p1">Contraseña</label><input id="p1" type="password" autocomplete="current-password" required><p class="err" id="er"></p><button class="btn">Entrar</button></form>`;return}
+a.innerHTML=`<div class="top"><h1 class="dp">Panel docente</h1><button class="btn sm mt" onclick="reload()">🔄 Actualizar</button><button class="btn sm gh" onclick="out()">Salir</button></div>
+<div class="tabs">${[['res','Resumen'],['al','Alumnos'],['tm','Temas y juegos'],['aj','Ajustes']].map(([k,l])=>`<button ${tab===k?'aria-current="page"':''} onclick="tab='${k}';sel=null;render()">${l}</button>`).join('')}</div>${tab==='res'?resumen():tab==='al'?(sel?detalle():alumnos()):tab==='tm'?temas():ajustes()}`}
+async function login(e){e.preventDefault();const er=$('#er');try{const r=await api('teacher/login','POST',{password:$('#p1').value});TOK=r.token;try{sessionStorage.setItem('sonoro_t',TOK)}catch(x){}await refresh();render()}catch(x){er.textContent=x.error}return false}
+function out(){TOK=null;try{sessionStorage.removeItem('sonoro_t')}catch(e){}sel=null;render()}
+
+function resumen(){const U=USERS,N=U.length||1,pts=U.reduce((s,u)=>s+u.T,0),pl=U.reduce((s,u)=>s+Object.values(u.stats||{}).reduce((a,x)=>a+x.plays,0),0),rd=U.reduce((s,u)=>s+Object.values(u.read||{}).filter(r=>r.done).length,0);
+const top=[...U].sort((a,b)=>b.T-a.T).slice(0,5),idle=U.filter(u=>!u.T&&!Object.keys(u.read||{}).length);
+const avg=a=>U.reduce((s,u)=>s+area(u,a),0)/N,mx=Math.max(1,...AREAS.map(avg));
+return `<div class="kp"><div class="card"><b>${U.length}</b><span>Alumnos</span></div><div class="card"><b>${pts}</b><span>Puntos sumados</span></div><div class="card"><b>${pl}</b><span>Partidas terminadas</span></div><div class="card"><b>${rd}</b><span>Lecturas completas</span></div></div>
+<div class="two"><div class="card"><h3>Promedio por área</h3><p class="mut" style="margin:2px 0 6px">¿En qué andan mejor?</p>${AREAS.map((a,i)=>`<div class="br"><span>${a}</span>${bar(avg(a),mx,['var(--sky)','var(--pink)','var(--sun)','var(--mint)'][i])}<b>${Math.round(avg(a))}</b></div>`).join('')}</div>
+<div class="card"><h3>Lectura por tema</h3><p class="mut" style="margin:2px 0 6px">Alumnos que llegaron al final</p>${TP.map(([id,n])=>{const d=U.filter(u=>((u.read||{})[id]||{}).done).length;return `<div class="br"><span>${esc(n)}</span>${bar(d,U.length,'var(--vio)')}<b>${d}/${U.length}</b></div>`}).join('')}</div></div>
+<div class="two"><div class="card"><h3>Top 5</h3>${top.map((u,i)=>`<div class="br" style="grid-template-columns:24px 1fr auto"><b>${i+1}</b><span>${esc(u.name)}</span><span class="pill">${u.T} pts</span></div>`).join('')||'<p class="mut">Todavía no hay alumnos.</p>'}</div>
+<div class="card"><h3>Sin actividad</h3>${idle.map(u=>`<span class="chip">${esc(u.name)}</span>`).join('')||'<p class="mut">Todos tienen actividad.</p>'}</div></div>`}
+const list=()=>{let U=USERS.filter(u=>u.name.toLowerCase().includes(q.toLowerCase()));return U.sort((a,b)=>srt==='nom'?a.name.localeCompare(b.name):srt==='niv'?b.L-a.L||b.T-a.T:b.T-a.T)};
+const rows=U=>U.map(u=>{const rd=Object.values(u.read||{}).filter(r=>r.done).length;return `<button class="row" onclick="sel='${esc(u.k).replace(/'/g,'')}';render()"><div class="n"><b>${esc(u.name)}</b><small>${esc(CH[u.avatar]||'—')} · lee ${rd}/${TP.length} temas${u.blanqueo?' · blanqueo pendiente':''}</small></div><span class="pill g">Nv ${u.L}</span><span class="pill">${u.T} pts</span></button>`}).join('')||'<p class="mut">No hay alumnos que coincidan.</p>';
+function alumnos(){return `<div class="two"><div><label for="q">Buscar</label><input id="q" value="${esc(q)}" oninput="q=this.value;$('#lst').innerHTML=rows(list())" placeholder="Nombre de usuario"></div><div><label for="so">Ordenar por</label><select id="so" onchange="srt=this.value;render()"><option value="pts" ${srt==='pts'?'selected':''}>Puntos</option><option value="niv" ${srt==='niv'?'selected':''}>Nivel</option><option value="nom" ${srt==='nom'?'selected':''}>Nombre</option></select></div></div><div id="lst">${rows(list())}</div>`}
+function detalle(){const u=USERS.find(x=>x.k===sel);if(!u){sel=null;return alumnos()}const mx=Math.max(1,...Object.keys(GM).map(id=>(u.points||{})[id]||0)),am=Math.max(1,...AREAS.map(a=>area(u,a)));
+const st=Object.values(u.stats||{}),pr=Object.entries(u.prog||{}),fx=d=>new Date(d).toLocaleString('es-AR',{dateStyle:'short',timeStyle:'short'});
+return `<button class="btn sm gh" onclick="sel=null;render()">‹ Volver</button><div class="card" style="margin-top:12px"><div class="top" style="margin:0"><h2 class="dp" style="flex:1">${esc(u.name)}</h2><span class="pill g">Nivel ${u.L}</span><span class="pill">${u.T} pts</span></div><p class="mut" style="margin:6px 0 0">Personaje: ${esc(CH[u.avatar]||'—')} · Partidas: ${st.reduce((a,x)=>a+x.plays,0)} · Mejor partida: ${Math.max(0,...st.map(x=>x.best))}${pr.length?' · En curso: '+pr.map(([id,p])=>esc((GM[id]||[id])[0])+' nivel '+(p.level+1)).join(', '):''}</p></div>
+<div class="two"><div class="card"><h3>Por juego</h3>${Object.entries(GM).map(([id,g])=>`<div class="br"><span>${esc(g[0])}</span>${bar((u.points||{})[id]||0,mx,'var(--pink)')}<b>${(u.points||{})[id]||0}</b></div>`).join('')}<h3 style="margin-top:14px">Por área</h3>${AREAS.map(a=>`<div class="br"><span>${a}</span>${bar(area(u,a),am,'var(--sky)')}<b>${area(u,a)}</b></div>`).join('')}</div>
+<div class="card"><h3>Teoría</h3>${TP.map(([id,n,t])=>{const r=(u.read||{})[id],v=r&&r.v?r.v.length:0;return `<div class="rd"><span style="flex:1">${esc(n)}</span>${bar(v,t,'var(--mint)')}<span class="pill ${r&&r.done?'g':''}">${r&&r.done?'Leída':v?v+'/'+t:'—'}</span></div>`}).join('')}</div></div>
+<div class="card"><h3>Acciones</h3><div class="pl"><button class="btn" onclick="blankM('${esc(u.k).replace(/'/g,'')}')">🔑 Blanquear contraseña</button><button class="btn pk" onclick="delM('${esc(u.k).replace(/'/g,'')}')">🗑️ Eliminar usuario</button></div>${u.blanqueo?`<p class="mut">Blanqueo pendiente: el alumno todavía no creó su contraseña nueva. El enlace vence el ${fx(u.blanqueo.exp)}.</p>`:''}</div>`}
+function blankM(k){modal(`<h3>Blanquear contraseña</h3><p>Se anula la contraseña actual de <b>${esc(k)}</b> y se genera un enlace seguro, de un solo uso, que vence en 24 horas. Se lo mandás al alumno y él elige su contraseña nueva.</p><div class="pl"><button class="btn" id="bb" onclick="doBlank('${k}')">Generar enlace</button><button class="btn gh" onclick="close()">Cancelar</button></div>`)}
+async function doBlank(k){const b=$('#bb');if(b)b.disabled=true;try{const r=await api('teacher/blank','POST',{username:k});const f=new Date(r.exp).toLocaleString('es-AR',{dateStyle:'short',timeStyle:'short'});
+const msg=`Hola ${r.name}! Tu docente blanqueó tu contraseña de Sonoro. Para crear una nueva, entrá a este enlace (sirve una sola vez y vence el ${f}):\n${r.link}`;
+close();modal(`<h3>Enlace de blanqueo</h3><p class="mut">Mensaje listo para mandar al mail personal del alumno. Copialo ahora: por seguridad no se puede volver a ver. Si lo perdés, generá uno nuevo.</p><textarea id="ex" rows="7" readonly onclick="this.select()">${esc(msg)}</textarea><div class="pl"><button class="btn" onclick="cpy()">Copiar mensaje</button><button class="btn gh" onclick="close()">Cerrar</button></div>`);await reload()}catch(e){close();toast(e.error)}}
+function cpy(){const t=$('#ex');t.select();try{navigator.clipboard.writeText(t.value).then(()=>toast('Copiado'),()=>{document.execCommand('copy');toast('Copiado')})}catch(e){try{document.execCommand('copy');toast('Copiado')}catch(x){}}}
+function delM(k){modal(`<h3>Eliminar usuario</h3><p>Se va a borrar a <b>${esc(k)}</b> con todos sus puntos y progreso. No se puede deshacer.</p><div class="pl"><button class="btn pk" onclick="doDel('${k}')">Eliminar</button><button class="btn gh" onclick="close()">Cancelar</button></div>`)}
+async function doDel(k){try{await api('teacher/delete','POST',{username:k});close();sel=null;await refresh();render();toast('Usuario eliminado')}catch(e){close();toast(e.error)}}
+async function saveSet(p){try{SET=(await api('teacher/settings','POST',p)).settings;render()}catch(e){toast(e.error)}}
+const setTopic=(id,v)=>saveSet({topics:{...SET.topics,[id]:v}});
+const allTopics=v=>{const t={};TP.forEach(([id])=>t[id]=v);return saveSet({topics:t})};
+const sw=(on,js,l)=>`<button class="sw" role="switch" aria-checked="${on}" aria-label="${l}" onclick="${js}"></button>`;
+const GREAL=['ritmo','cambio','arena','ances','orig'],PLAN=['ances','orig'],gOpen=id=>SET.games&&SET.games[id]===true;
+const setGame=(id,v)=>saveSet({games:{...SET.games,[id]:v}});
+const allGames=v=>{const t={};GREAL.forEach(id=>t[id]=v);return saveSet({games:t})};
+function temas(){const U=USERS;return `<h3 style="margin:0 0 8px">Temas de teoría</h3><div class="pl" style="margin-bottom:12px"><button class="btn sm mt" onclick="allTopics(true)">Habilitar todos</button><button class="btn sm gh" onclick="allTopics(false)">Bloquear todos</button></div>${TP.map(([id,n,t])=>{const on=open_(id),d=U.filter(u=>((u.read||{})[id]||{}).done).length,s=U.filter(u=>(u.read||{})[id]&&!u.read[id].done).length;return `<div class="row">${sw(on,`setTopic('${id}',${!on})`,n)}<div class="n"><b>${esc(n)}</b><small>${t} diapositivas · ${d} la terminaron · ${s} en curso</small></div><span class="pill ${on?'g':'r'}">${on?'Habilitado':'Bloqueado'}</span></div>`}).join('')}
+<h3 style="margin:22px 0 8px">Juegos</h3><div class="pl" style="margin-bottom:12px"><button class="btn sm mt" onclick="allGames(true)">Habilitar todos</button><button class="btn sm gh" onclick="allGames(false)">Bloquear todos</button></div>${GREAL.map(id=>{const on=gOpen(id),j=U.filter(u=>u.stats&&u.stats[id]&&u.stats[id].plays).length;return `<div class="row">${sw(on,`setGame('${id}',${!on})`,GM[id][0])}<div class="n"><b>${esc(GM[id][0])}</b><small>Área ${esc(GM[id][1])} · ${PLAN.includes(id)?'Todavía sin juego: si lo habilitás, los alumnos ven “Próximamente”':j+' alumnos lo terminaron'}</small></div><span class="pill ${on?'g':'r'}">${on?'Habilitado':'Bloqueado'}</span></div>`}).join('')}<p class="mut">Los temas y los juegos empiezan bloqueados. Los alumnos los ven con candado hasta que los habilites.</p>`}
+function ajustes(){const on=SET.allowSignup!==false;return `<div class="row">${sw(on,`saveSet({allowSignup:${!on}})`,'Permitir usuarios nuevos')}<div class="n"><b>Permitir usuarios nuevos</b><small>Si lo apagás, nadie puede crear cuenta.</small></div><span class="pill ${on?'g':'r'}">${on?'Sí':'No'}</span></div>
+<div class="card"><h3>Mi contraseña</h3><p class="mut">Se cambia en Vercel: Settings → Environment Variables → <b>TEACHER_PASSWORD</b>, y después Redeploy.</p></div>`}
+init();
+</script></body></html>

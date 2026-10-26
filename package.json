@@ -1,0 +1,8 @@
+{
+  "name": "sonoro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sonoro: plataforma de música para 1° año",
+  "scripts": { "test": "node test/api.test.js && node test/ui.test.js && node test/docente.test.js && node test/arena.test.js && node test/arena_flow.test.js", "dev": "vercel dev" },
+  "dependencies": { "mongodb": "^6.8.0" }
+}
